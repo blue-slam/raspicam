@@ -3,12 +3,14 @@
 <launch>
   
   <node pkg="raspicam" type="raspicam_raw_node" name="raspicam_node" respawn="true" ns="camera" output="screen">
-    <param name="quality" type="double" value="10.0"/>
+    <param name="quality" type="double" value="50.0"/>
     <param name="framerate" type="double" value="30.0"/>
     <param name="width" type="double" value="640.0" />
     <param name="height" type="double" value="480.0" />
     <param name="hflip" type="double" value="1.0" />
   </node>
   
+  <node pkg="image_transport" type="republish" name="compressor" args="raw in:=/camera/image theora out:=/camera/image" respawn="true" output="screen"/>
+
   <!--node pkg="image_proc" type="image_proc" name="image_proc" respawn="true" ns="/camera"/-->
 </launch>
